@@ -16,7 +16,6 @@ interface HomeProps {
 
 export default function Home({ product }: HomeProps) {
   const [session] = useSession();
-  console.log(session);
   return (
     <>
       <Head>
