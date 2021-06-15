@@ -1,4 +1,5 @@
 import { GetStaticProps } from "next";
+import { useSession } from "next-auth/client";
 import Head from "next/head";
 import { SubscribeButton } from "../components/SubscribeButton";
 import { FormatCurrency } from "../helpers/Currency";
@@ -14,6 +15,8 @@ interface HomeProps {
 }
 
 export default function Home({ product }: HomeProps) {
+  const [session] = useSession();
+  console.log(session);
   return (
     <>
       <Head>
@@ -21,7 +24,12 @@ export default function Home({ product }: HomeProps) {
       </Head>
       <main className={styles.contentContainer}>
         <section className={styles.hero}>
-          <span>👏 Hey, welcome</span>
+          {session ? (
+            <span>👏 Hey, {session.user.name}</span>
+          ) : (
+            <span>👏 Hey, welcome</span>
+          )}
+
           <h1>
             News about the <span>React</span> world.
           </h1>
